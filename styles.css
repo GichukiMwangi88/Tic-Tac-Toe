@@ -1,0 +1,30 @@
+* {
+    margin: auto;
+
+}
+
+
+
+body {
+    margin-top: 50px;
+    background-color: blanchedalmond;
+    font-family: 'Lobster', cursive    !important;
+    font-size: large;
+    
+    
+}
+
+.footer  {
+    display: block;
+    height: 60px;
+    margin-top: 650px;
+      
+}
+
+#icon {
+    margin-left: 100px;
+    float: right;
+}
+
+
+
