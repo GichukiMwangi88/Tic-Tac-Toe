@@ -14,6 +14,33 @@ body {
     
 }
 
+/*----Adjust layout of the Begin Button*/
+
+#begin {
+    margin-top: 20px;
+}
+
+/* -----Game Board Display----*/
+
+.game-board {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr) ;
+    border: 1px solid red;
+    border-radius: 2rem;
+    height: 500px;
+    margin-top: 50px;
+    overflow: hidden;
+    
+}
+
+.grid-item {
+    border: 2px solid black;
+    height: 100px;
+    width: 150px;
+}
+
+/*----Footer Display----*/
+
 .footer  {
     display: block;
     height: 60px;
