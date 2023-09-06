@@ -1,12 +1,13 @@
-* {
-    margin: auto;
-
-}
-
-
 
 body {
-    margin-top: 50px;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    flex-direction: column;
+
     background-color: blanchedalmond;
     font-family: 'Caveat', cursive;
     font-size: large;
@@ -14,29 +15,37 @@ body {
     
 }
 
+/*---Center the 2 player inputs----*/
+
+.container form {
+    
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
 /*----Adjust layout of the Begin Button*/
 
-#begin {
+#begin,  #reset {
     margin-top: 20px;
 }
 
 /* -----Game Board Display----*/
 
 .game-board {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr) ;
-    border: 1px solid red;
-    border-radius: 2rem;
-    height: 500px;
-    margin-top: 50px;
-    overflow: hidden;
+    width: 300px;
+    height: 300px;
+    background-color: black;
+    display: flex;
+    flex-wrap: wrap;
     
 }
 
-.grid-item {
+.square {
     border: 2px solid black;
     height: 100px;
-    width: 150px;
+    width: 100px;
+    background-color: white;
 }
 
 /*----Footer Display----*/
