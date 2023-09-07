@@ -34,9 +34,28 @@ const Gameboard = (() => {
     render();
   };
 
+  const getGameboard = () => gameboard;
+
+  //Check for winner
+
+  const checkForWin = (board) => {
+    const winningCombinations = [
+        [0,1,2],
+        [3,4,5],
+        [6,7,8],
+        [0,3,6],
+        [1,4,7],
+        [2,5,8],
+        [0,4,8],
+        [2,4,6],
+    ]
+
+  }
+
   return {
     render,
     update,
+    getGameboard
   };
 })();
 
@@ -68,16 +87,33 @@ const Game = (() => {
   };
   const handleClick = (event) => {
     let index = parseInt(event.target.id.split("-")[1]);
+    
+    if (Gameboard.getGameboard()[index] !== "")
+      return;
+
     Gameboard.update(index, players[currentPlayerIndex].mark);
 
     currentPlayerIndex = currentPlayerIndex === 0 ? 1 : 0;
+
+   
   };
+
+  const restart = () => {
+    for(let i= 0; i < 9; i++) {
+        Gameboard.update(i, "");
+    }
+    Gameboard.render();
+
+  }
 
   return {
     start,
     handleClick,
+    restart
   };
 })();
+
+//
 
 /*---Click Begin Button and Game board displays */
 
@@ -86,3 +122,11 @@ const beginGame = document.querySelector("#begin");
 beginGame.addEventListener("click", () => {
   Game.start();
 });
+
+/*--Restart the game-- */
+
+const resetButton = document.querySelector("#reset");
+
+resetButton.addEventListener("click", () => {
+    Game.restart()
+})

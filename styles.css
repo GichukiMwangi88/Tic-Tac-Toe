@@ -37,7 +37,7 @@ body {
    display: grid;
    grid-template-columns: repeat(3, 1fr);
    place-items: center;
-   margin: 2em auto;
+   margin: 3em auto;
    
   
    
@@ -47,12 +47,18 @@ body {
 .square {
    background: white;
    height: 100px;
-   width: 100px;
+   width:  100px;
    border: 2px solid black;
    display: flex;
    justify-content: center;
    align-items: center;
 }
+
+div.square:nth-child(1) {
+    height: 100px;
+}
+
+
 
    
    
