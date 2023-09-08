@@ -23,6 +23,8 @@ const Gameboard = (() => {
 
     // Add the the created board to the DOM element #board
     document.querySelector(".gameboard").innerHTML = boardHTML;
+
+    //Way to handle click events for each square tile
     const squares = document.querySelectorAll(".square");
     squares.forEach((square) => {
       square.addEventListener("click", Game.handleClick);
@@ -102,6 +104,11 @@ const Game = (() => {
     for(let i= 0; i < 9; i++) {
         Gameboard.update(i, "");
     }
+
+    //Clears the player 1 and 2 input fields
+
+    document.querySelector("#playerOne").value = "";
+    document.querySelector("#playerTwo").value = "";
     Gameboard.render();
 
   }

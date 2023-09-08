@@ -1,7 +1,5 @@
 
 body {
-    margin: 0;
-    padding: 0;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -9,7 +7,7 @@ body {
 
     background-color: blanchedalmond;
     font-family: 'Caveat', cursive;
-    font-size: large;
+    font-size: 40px;
   
 }
 
@@ -35,33 +33,23 @@ body {
    height: 300px;
    width: 300px;
    display: grid;
-   grid-template-columns: repeat(3, 1fr);
+   grid-template-columns: repeat(3, auto);
    place-items: center;
-   margin: 3em auto;
-   
-  
-   
+   margin: 3em auto;   
     
 }
 
 .square {
-   background: white;
+   background-color: white;
    height: 100px;
    width:  100px;
-   border: 2px solid black;
+   border: 1.5px solid black;
    display: flex;
    justify-content: center;
    align-items: center;
+   font-size: 60px;
+   cursor: pointer;
 }
-
-div.square:nth-child(1) {
-    height: 100px;
-}
-
-
-
-   
-   
    
 
 /*----Footer Display----*/
@@ -69,14 +57,10 @@ div.square:nth-child(1) {
 .footer  {
     display: block;
     height: 60px;
-    margin-top: 650px;
+    margin-top: 500px;
       
 }
 
-#icon {
-    margin-left: 100px;
-    float: right;
-}
 
 
 
