@@ -4,7 +4,6 @@ body {
     justify-content: center;
     align-items: center;
     flex-direction: column;
-
     background-color: blanchedalmond;
     font-family: 'Caveat', cursive;
     font-size: 40px;
@@ -35,7 +34,8 @@ body {
    display: grid;
    grid-template-columns: repeat(3, auto);
    place-items: center;
-   margin: 3em auto;   
+   margin: 3em auto;
+   margin-top: 15px;   
     
 }
 
@@ -49,6 +49,13 @@ body {
    align-items: center;
    font-size: 60px;
    cursor: pointer;
+}
+
+.statusText {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 0;
 }
    
 

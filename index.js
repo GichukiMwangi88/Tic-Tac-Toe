@@ -1,139 +1,105 @@
-/*----Object that displays the game board*/
+// DOM Elements
 
-const Gameboard = (() => {
-  let gameboard = ["", "", "", "", "", "", "", "", ""]; //array storing the gameboard
+const cells = document.querySelectorAll(".square");
+const statusText = document.querySelector(".statusText");
+const restartBtn = document.querySelector("#reset");
 
-  //Way to render the board on display
-  // use a loop to loop through each element in
-  // the array and add it to the game board
+const winningConditions = [
+  [0,1,2],
+  [3,4,5],
+  [6,7,8],
+  [0,3,6],
+  [1,4,7],
+  [2,5,8],
+  [0,4,8],
+  [2,4,6]
 
-  const render = () => {
-    let boardHTML = "";
-    gameboard.forEach((square, index) => {
-      //Validation - ensure player names are entered.
-      if (
-        document.querySelector("#playerOne").value === "" &&
-        document.querySelector("#playerTwo").value === ""
-      ) {
-        return;
-      } else {
-        boardHTML += `<div class="square" id="square-${index}">${square}</div>`;
-      }
-    });
+];
 
-    // Add the the created board to the DOM element #board
-    document.querySelector(".gameboard").innerHTML = boardHTML;
+let options = ["", "", "", "", "", "", "", "", ""];
 
-    //Way to handle click events for each square tile
-    const squares = document.querySelectorAll(".square");
-    squares.forEach((square) => {
-      square.addEventListener("click", Game.handleClick);
-    });
-  };
+let currentPlayer = "X"; //keeps track of the current player
+let running = false;  //keeps track of the game running
 
-  const update = (index, value) => {
-    gameboard[index] = value;
-    render();
-  };
+//Begin game
+initializeGame();
 
-  const getGameboard = () => gameboard;
+function initializeGame() {
+  cells.forEach(cell => cell.addEventListener("click", cellClicked) )
+  restartBtn.addEventListener("click", restartGame);
+  statusText.textContent = `${currentPlayer}'s turn`;
+  running = true;
 
-  //Check for winner
-
-  const checkForWin = (board) => {
-    const winningCombinations = [
-        [0,1,2],
-        [3,4,5],
-        [6,7,8],
-        [0,3,6],
-        [1,4,7],
-        [2,5,8],
-        [0,4,8],
-        [2,4,6],
-    ]
-
-  }
-
-  return {
-    render,
-    update,
-    getGameboard
-  };
-})();
-
-// Factory Function that creates players
-
-const createPlayer = (name, mark) => {
-  return {
-    name,
-    mark,
-  };
 };
 
-/*--- Game Controller- controls when the game starts----*/
+function cellClicked() {
+  const cellIndex = this.getAttribute("cellIndex");
+  //check if cell is empty or game isn't running
+  if(options[cellIndex] != "" || !running) {
+    return
+  }
 
-const Game = (() => {
-  let players = [];
-  let currentPlayerIndex;
-  let gameOver;
+  updateCell(this, cellIndex);
+  checkWinner()
 
-  const start = () => {
-    players = [
-      createPlayer(document.querySelector("#playerOne").value, "X"),
-      createPlayer(document.querySelector("#playerTwo").value, "O"),
-    ];
+}
 
-    currentPlayerIndex = 0;
-    gameOver = false;
-    Gameboard.render();
-  };
-  const handleClick = (event) => {
-    let index = parseInt(event.target.id.split("-")[1]);
-    
-    if (Gameboard.getGameboard()[index] !== "")
-      return;
+function updateCell(cell, index) {
+  options[index] = currentPlayer;
+  cell.textContent = currentPlayer;
 
-    Gameboard.update(index, players[currentPlayerIndex].mark);
+}
 
-    currentPlayerIndex = currentPlayerIndex === 0 ? 1 : 0;
+function changePlayer() {
+ if(currentPlayer === "X") {
+  currentPlayer = "O"
+ } else {
+  currentPlayer = "X";
+ }
+ statusText.textContent = `${currentPlayer}'s turn`;
 
-   
-  };
 
-  const restart = () => {
-    for(let i= 0; i < 9; i++) {
-        Gameboard.update(i, "");
-    }
+}
 
-    //Clears the player 1 and 2 input fields
+function checkWinner() {
+  let roundWon = false;
 
-    document.querySelector("#playerOne").value = "";
-    document.querySelector("#playerTwo").value = "";
-    Gameboard.render();
+  for(let i = 0; i < winningConditions.length; i++) {
+    const condition = winningConditions[i];
+    const cellA = options[condition[0]];
+    const cellB = options[condition[1]];
+    const cellC = options[condition[2]];
+
+    // check if the spaces are empty
+    if(cellA === "" || cellB === "" || cellC === "") {
+        continue;
+     }
+
+     if(cellA === cellB && cellB === cellC) {
+        roundWon = true;
+        break;
+     }
 
   }
 
-  return {
-    start,
-    handleClick,
-    restart
-  };
-})();
+  if(roundWon) {
+    statusText.textContent = `${currentPlayer} wins`;
+    running = false;
+  }
+  else if(!options.includes("")) {
+    statusText.textContent = `Draw!`;
+    running = false;
+  }
+  else {
+    changePlayer();
+  }
+  
+};
 
-//
-
-/*---Click Begin Button and Game board displays */
-
-const beginGame = document.querySelector("#begin");
-
-beginGame.addEventListener("click", () => {
-  Game.start();
-});
-
-/*--Restart the game-- */
-
-const resetButton = document.querySelector("#reset");
-
-resetButton.addEventListener("click", () => {
-    Game.restart()
-})
+function restartGame() {
+  currentPlayer = "X";
+  options = ["", "", "", "", "", "", "", "", ""];
+  cells.forEach(cell => cell.textContent = "");
+  running = true;
+  
+};
