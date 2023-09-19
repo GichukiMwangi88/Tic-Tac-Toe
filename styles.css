@@ -10,7 +10,9 @@ body {
   
 }
 
-/*---Center the 2 player inputs----*/
+div h1 {
+    margin: 15px;
+}
 
 .container form {
     
@@ -19,9 +21,9 @@ body {
     justify-content: center;
 }
 
-/*----Adjust layout of the Begin Button*/
+/*----Adjust layout of the Reset Button*/
 
-#begin,  #reset {
+#reset {
     margin-top: 20px;
 }
 
@@ -34,8 +36,8 @@ body {
    display: grid;
    grid-template-columns: repeat(3, auto);
    place-items: center;
-   margin: 3em auto;
-   margin-top: 15px;   
+   margin: 1em auto;
+    
     
 }
 
